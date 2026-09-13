@@ -1,0 +1,5 @@
+# Keep GitHub's language stats on the code, not on the rendered report and dataset
+docs/** linguist-documentation
+synthetic-ambient-fhir-25/** linguist-vendored
+*.html linguist-documentation
+*.jsonl linguist-vendored
