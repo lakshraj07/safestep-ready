@@ -45,3 +45,5 @@ relay-demo/
 
 # Local agent notes (contains venue creds — never commit)
 AGENTS.md
+
+!.env.example
