@@ -1,7 +1,7 @@
 import Combine
 import Foundation
 
-/// Phone voice session. Live: start a Vapi assistant with VAPI_API_KEY + VAPI_ASSISTANT_ID.
+/// Phone voice session. Live: start an ElevenLabs conversational agent (ELEVENLABS_AGENT_ID) or a Vapi assistant (VAPI_ASSISTANT_ID); both use the backend /v1 as custom LLM.
 /// Demo: the web app plays a fixed Riley script; this class is session plumbing.
 @MainActor
 final class VoiceManager: ObservableObject {

@@ -1,8 +1,18 @@
 # SafeStep Ready — verify the home before discharge
 
-**Medplum holds the chart. Twilio auto-texts the family a walkthrough link. Vapi (Riley) guides the iPhone scan. SafeStep writes draft FHIR + Medicare/insurance coverage back to Medplum (EHR / PIMS).**
+**Medplum holds the chart. Twilio auto-texts the family a walkthrough link. Riley (ElevenLabs voice, Vapi optional) guides the iPhone scan while Claude analyzes frames live. SafeStep writes draft FHIR + Medicare/insurance coverage back to Medplum (EHR / PIMS).**
 
 ![Architecture: chart to SMS to home walkthrough to analysis to draft FHIR back to the chart](docs/architecture.png)
+
+## The three agents in the video, mapped to code
+
+| Agent (video) | Does | Code |
+| --- | --- | --- |
+| **Vision agent** | Claude Haiku fast-pass per frame (~1.3 s) for live callouts; Claude Sonnet deep-pass grades CDC STEADI / HSSAT findings with photo evidence | `engine/backend/vision.py`, `prompts.py` |
+| **Geometry agent** | RoomPlan LiDAR mesh in, doorway and opening widths out; walker-clearance math (bathroom door 27.1 in vs 28.0 in walker); floor plan with the failing door in red | `engine/backend/geometry.py`, `floorplan.py`, `engine/iphone/Sources/RoomScanner.swift` |
+| **Arbitration agent** | Scores every discharge-note obligation `verified / at_risk / blocked / unverified`, routes each fix to OT / social work / care team / caregiver with owner + deadline, drafts FHIR Observations, ServiceRequests (HCPCS + Medicare coverage) and Tasks | `engine/backend/obligations.py`, `escalations.py`, `journey.py`, `fhir_writeback.py` |
+
+Riley's voice brain is the same backend: `POST /v1/chat/completions` (SSE) in `engine/backend/brain.py`, pointed at by the ElevenLabs (or Vapi) agent's custom-LLM URL.
 
 ## What runs live today vs. what is scripted
 
@@ -12,8 +22,9 @@
 | Claude Haiku fast-pass per frame, Claude Sonnet deep-pass (STEADI/HSSAT), obligations scoring, Riley brain (`/v1/chat/completions` SSE) | **Live** with `ANTHROPIC_API_KEY` | `engine/backend/vision.py`, `brain.py`, `obligations.py` |
 | Walker-clearance math, escalation router, HCPCS / Medicare coverage table, draft FHIR Bundle, clinician report + approvals | **Live** (deterministic) | `engine/backend/geometry.py`, `escalations.py`, `fhir_writeback.py`, `report.py` |
 | Replay any real walkthrough video through the real pipeline | **Live** after `prepare_demo.py <video>` | `engine/backend/prepare_demo.py`, `demo.py` |
-| Medplum read of the note and POST of the Bundle, Twilio SMS, Vapi call start | **Adapter stubs**: interfaces and payloads are built, the outbound HTTP calls are the next commit (`engine/.env.example` lists the keys) | `src/lib/medplum.ts`, `src/lib/outreach.ts`, `engine/iphone/Sources/VoiceManager.swift` |
+| Medplum read of the note and POST of the Bundle, Twilio SMS, ElevenLabs / Vapi call start | **Adapter stubs**: interfaces and payloads are built, the outbound HTTP calls are the next commit (`engine/.env.example` lists the keys) | `src/lib/medplum.ts`, `src/lib/outreach.ts`, `engine/iphone/Sources/VoiceManager.swift` |
 | Web demo (EHR surface, scripted iPhone bezel, write-back review) | **Runs with no keys** | `src/` |
+| Reliability evaluation (50 simulated LiDAR meshes against Medplum / Twilio stateful twins, shown in the video) | **Harness not in this repo yet**: the clearance math it exercises is `engine/backend/geometry.py`; `curl /api/eval` runs the single bathroom-door assertion today | `src/app/api/eval/route.ts` |
 
 ![SafeStep — Monica Hilpert, 76 — her chart cannot answer one question: is her home ready for her?](engine/docs/intro.jpg)
 
@@ -69,10 +80,9 @@ DocumentReference              auto-texts family              AR boxes (YOLOv3 N
 
 4. **The verdict** — SafeStep scores every obligation it derived from the Medplum note
    against walkthrough evidence (`verified / at_risk / blocked / unverified`). The killer
-   finding is a measurement, not a vibe: **"The bathroom doorway is 27.6 in. Monica's walker
+   finding is a measurement, not a vibe: **"The bathroom doorway is 27.1 in. Monica's walker
    is 28. The discharge plan as written will not work."**
 
-   ![LiDAR measurement: doorway 27.6in vs walker 28.0in — the discharge plan physically cannot work](engine/docs/doorway.jpg)
 
 5. **Care-team review in Medplum** — a split-view station: drafted actions (clinical /
    operational / DME, each with owner + deadline + evidence) awaiting clinician
@@ -145,7 +155,7 @@ From `engine/backend/fhir_writeback.py` `DME_CATALOG` (keys match substrings of 
 | Night lights / motion-sensor lighting | — | Not DME — home modification; flag OT / social work |
 | Offset hinges / door widening | E1399 | Home modification — not standard Part B DME; review in Medplum |
 
-Monica's blocked bathroom door (27.6 in vs 28 in walker) typically drafts E1399 / OT + SW, optional E0143 only if the door cannot be widened, E0241 grab bars (not Original Medicare), and E0163 if she would be room-confined.
+Monica's blocked bathroom door (27.1 in vs 28 in walker) typically drafts E1399 / OT + SW, optional E0143 only if the door cannot be widened, E0241 grab bars (not Original Medicare), and E0163 if she would be room-confined.
 
 ## External apps (hackathon loop)
 
@@ -181,7 +191,7 @@ npm run dev
 Open http://127.0.0.1:43127
 
 1. **Pull note (Twilio texts the link)** — Medplum mock DocumentReference in; Twilio auto-SMS to Maya.
-2. **Open Maya's phone** (`/walkthrough?auto=1`) — Riley (scripted gathering-mode) walks entry → kitchen → bathroom. Geometry flags 27.6 vs 28.
+2. **Open Maya's phone** (`/walkthrough?auto=1`) — Riley (scripted gathering-mode) walks entry → kitchen → bathroom. Geometry flags 27.1 vs 28.
 3. **Write-back** — draft FHIR + HCPCS/Medicare table. Check records as if in Medplum; approve; **VERIFIED, cleared for discharge**.
 
 ```bash

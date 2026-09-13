@@ -114,16 +114,16 @@ export const rooms: RoomScript[] = [
     confirmation: {
       id: "c-bath",
       question:
-        "I measured this door at 27.6 in — does Monica pass through it day-to-day?",
+        "I measured this door at 27.1 in — does Monica pass through it day-to-day?",
       source: "lidar",
     },
     events: [
       { t: 200, kind: "riley", text: "Pause on the bathroom doorway so I can measure it." },
-      { t: 1000, kind: "measure", text: "Bathroom door 27.6 in — walker is 28 in; it will NOT fit" },
+      { t: 1000, kind: "measure", text: "Bathroom door 27.1 in — walker is 28 in; it will NOT fit" },
       { t: 1600, kind: "riley", text: "That's enough. I have what the care team needs." },
     ],
     detections: [
-      { label: "door 27.6 in", x: 34, y: 18, w: 28, h: 62 },
+      { label: "door 27.1 in", x: 34, y: 18, w: 28, h: 62 },
     ],
   },
 ]
@@ -142,7 +142,7 @@ export const obligations: {
       "Ensure the 28-inch front-wheeled walker is present, correctly fitted, and used for all standing and ambulation at home.",
     quote: "uses a 28in front-wheeled walker",
     evidence:
-      "Measurement shows a doorway is only 27.6 in wide while Monica's walker is 28 in wide, so it will NOT fit through this door.",
+      "Measurement shows a doorway is only 27.1 in wide while Monica's walker is 28 in wide, so it will NOT fit through this door.",
   },
   {
     status: "at_risk",
@@ -181,7 +181,7 @@ export const findings: {
 }[] = [
   {
     severity: "critical",
-    title: "Bathroom doorway 27.6 in vs 28 in walker — discharge plan physically blocked",
+    title: "Bathroom doorway 27.1 in vs 28 in walker — discharge plan physically blocked",
     why: "With osteoporosis, a failed doorway forces unsafe device abandonment or a fall at the highest-risk room in the home.",
     rec: "Widen or re-hang the door, install offset hinges, or prescribe a narrower rolling walker / wheelchair and re-measure before discharge.",
     instrument: "HSSAT · doorway clearance",
@@ -225,7 +225,7 @@ export const findings: {
 
 export const measurements = [
   { label: "Entry door width", value: "30.4 in", ok: true, note: "Clears 28 in walker" },
-  { label: "Bathroom door width", value: "27.6 in", ok: false, note: "Walker 28 in — will not fit" },
+  { label: "Bathroom door width", value: "27.1 in", ok: false, note: "Walker 28 in — will not fit" },
   { label: "Kitchen opening", value: "33.8 in", ok: true, note: "Clears 28 in walker" },
 ]
 
@@ -248,14 +248,14 @@ export const approvalsSeed: {
     kind: "operational",
     title: "Social work: overnight coverage until doorway is remediated",
     detail:
-      "Lives alone; plan as written requires walker through a 27.6 in door → SW, due 24 hours.",
+      "Lives alone; plan as written requires walker through a 27.1 in door → SW, due 24 hours.",
   },
   {
     id: "a-hinge",
     kind: "dme",
     title: "Order: offset door hinges / door widening consult (HCPCS E1399)",
     detail:
-      "Reason: bathroom doorway 27.6 in vs 28 in walker.",
+      "Reason: bathroom doorway 27.1 in vs 28 in walker.",
     coverage:
       "Home modification / E1399 — not a standard Part B DME item; flag for OT and possible MA or waiver. Review in Medplum before send.",
   },
@@ -313,7 +313,7 @@ export const fhirDrafts = [
     resourceType: "Observation",
     status: "DRAFT — requires clinician review",
     code: "Home doorway width (bathroom)",
-    value: "27.6 in; walker 28 in; does not clear",
+    value: "27.1 in; walker 28 in; does not clear",
   },
   {
     resourceType: "ServiceRequest",
@@ -327,7 +327,7 @@ export const fhirDrafts = [
     resourceType: "ServiceRequest",
     status: "DRAFT — requires clinician review",
     code: "Folding wheeled walker (E0143) — only if doorway cannot be remediated",
-    value: "28in walker does not clear 27.6in door",
+    value: "28in walker does not clear 27.1in door",
     coverage: "Covered by Medicare Part B as DME with physician order.",
   },
   {

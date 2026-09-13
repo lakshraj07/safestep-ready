@@ -39,7 +39,7 @@ export default function ReviewPage() {
     <div className="space-y-5">
       <div className="rounded-2xl bg-[#141312] p-6 text-white">
         <h1 className="text-2xl font-semibold tracking-tight">
-          Bathroom door 27.6 in. Walker 28 in.
+          Bathroom door 27.1 in. Walker 28 in.
         </h1>
         <p className="mt-2 text-sm text-white/70">
           {blocked?.evidence} Drafts land in Medplum. Coverage is scored against Original

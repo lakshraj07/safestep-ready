@@ -34,10 +34,10 @@ runs Riley. SafeStep writes draft FHIR + Medicare coverage back to Medplum.**
    On-screen confirmation cards resolve by tap **or voice**.
 4. **The verdict** — SafeStep scores every obligation it derived from the
    Medplum note against walkthrough evidence (`verified / at_risk / blocked / unverified`).
-   The killer finding is a measurement, not a vibe: **"The bathroom doorway is 27.6 in.
+   The killer finding is a measurement, not a vibe: **"The bathroom doorway is 27.1 in.
    Monica's walker is 28. The discharge plan as written will not work."**
 
-   ![LiDAR measurement: doorway 27.6in vs walker 28.0in — the discharge plan physically cannot work](docs/doorway.jpg)
+   ![LiDAR measurement: doorway 27.1in vs walker 28.0in — the discharge plan physically cannot work](docs/doorway.jpg)
 5. **Care-team review in Medplum** — drafted actions (clinical / operational / DME,
    each with owner + deadline + evidence + **HCPCS / Original Medicare vs MA coverage**)
    awaiting clinician approval, floor plans with the failing door drawn in red, the

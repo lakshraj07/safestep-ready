@@ -6,7 +6,7 @@ export async function GET() {
   return NextResponse.json({
     check: "bathroom_door_vs_walker",
     pass: door.blocked === true,
-    expected: "27.6in door does not clear 28in walker",
+    expected: "27.1in door does not clear 28in walker",
     result: door,
   })
 }

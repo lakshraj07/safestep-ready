@@ -31,7 +31,7 @@ DEFAULT_SCRIPT = {
          "roomplan": {
              "room": "bathroom",
              "doors": [{"x": 0.8, "z": 0, "dx": 1, "dz": 0,
-                        "len_m": 0.686, "width_m": 0.686}],
+                        "len_m": 0.688, "width_m": 0.688}],
              "floor_area_m2": 5.6,
              "geometry": {
                  "walls": [
@@ -40,7 +40,7 @@ DEFAULT_SCRIPT = {
                      {"x": 0, "z": 1.05, "dx": 0, "dz": 1, "len_m": 2.1},
                      {"x": 2.7, "z": 1.05, "dx": 0, "dz": 1, "len_m": 2.1}],
                  "doors": [{"x": 0.8, "z": 0, "dx": 1, "dz": 0,
-                            "len_m": 0.686, "width_m": 0.686}],
+                            "len_m": 0.688, "width_m": 0.688}],
                  "openings": [],
                  "windows": [{"x": 2.7, "z": 1.0, "dx": 0, "dz": 1, "len_m": 0.7}],
                  "objects": [

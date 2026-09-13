@@ -13,7 +13,7 @@ targets:
         UILaunchScreen: {}
         CFBundleDisplayName: SafeStep
         UIUserInterfaceStyle: Light
-        NSMicrophoneUsageDescription: Voice conversation with the walkthrough guide (Vapi).
+        NSMicrophoneUsageDescription: Voice conversation with the walkthrough guide (ElevenLabs or Vapi).
         NSCameraUsageDescription: Room scanning during the iPhone walkthrough.
         NSAppTransportSecurity:
           NSAllowsArbitraryLoads: true

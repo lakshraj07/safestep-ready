@@ -64,7 +64,7 @@ function WalkthroughInner() {
         void fetch("/api/eval", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ room: "bathroom", doors: [{ width_m: 0.701 }] }),
+          body: JSON.stringify({ room: "bathroom", doors: [{ width_m: 0.688 }] }),
         }).then(() => nextRoom())
       } else {
         nextRoom()
@@ -88,7 +88,7 @@ function WalkthroughInner() {
         </CardHeader>
         <CardContent className="space-y-3 text-sm">
           <p>
-            Bathroom door 27.6 in. Walker 28 in. Next: Medplum records + Medicare/insurance
+            Bathroom door 27.1 in. Walker 28 in. Next: Medplum records + Medicare/insurance
             coverage on every drafted order.
           </p>
           <Button onClick={() => router.push("/review")}>Open Medplum write-back</Button>
@@ -165,7 +165,7 @@ function WalkthroughInner() {
                     headers: { "content-type": "application/json" },
                     body: JSON.stringify({
                       room: "bathroom",
-                      doors: [{ width_m: 0.701 }],
+                      doors: [{ width_m: 0.688 }],
                     }),
                   })
                 }

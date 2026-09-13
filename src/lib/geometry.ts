@@ -66,7 +66,7 @@ export function ingestRoomplan(payload: RoomPlanPayload): Measurement[] {
 }
 
 /** Reliability check used in /api/eval — the blocker the rest of the workflow hangs on. */
-export function bathroomDoorBlocked(width_m = 0.701) {
+export function bathroomDoorBlocked(width_m = 0.688) {
   const [m] = ingestRoomplan({ room: "bathroom", doors: [{ width_m }] })
   return {
     width_in: m?.width_in,
