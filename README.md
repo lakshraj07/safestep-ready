@@ -101,26 +101,6 @@ Twilio   Messages.create ------------------> family iPhone (walkthrough link)
   coverage flags), Tasks (escalations), all tagged `DRAFT, requires clinician review`
   (`backend/fhir_writeback.py`).
 
-### Coverage catalog
-
-From `backend/fhir_writeback.py` `DME_CATALOG`. Keys match substrings of the
-recommendation text; `"walker"` alone is not a trigger because Monica already owns one,
-only `"replacement walker"` is.
-
-| Item | HCPCS | Original Medicare / insurance |
-| --- | --- | --- |
-| Bathtub wall rail / grab bar | E0241 | Not covered by Original Medicare; often MA supplemental or state waiver, routed to social work |
-| Bath/shower chair | E0240 | Not covered by Original Medicare; low-cost self-pay; MA plans often cover |
-| Raised toilet seat | E0244 | Not covered by Original Medicare; MA supplemental often covers |
-| Folding wheeled walker (replacement) | E0143 | Covered by Medicare Part B as DME with physician order |
-| Bedside commode | E0163 | Covered by Medicare Part B when the patient is room-confined |
-| Night lights / motion-sensor lighting | (none) | Home modification, routed to OT / social work |
-| Offset hinges / door widening | E1399 | Home modification, not standard Part B DME; reviewed in Medplum |
-
-Monica's blocked bathroom door (27.1 in vs 28 in walker) drafts E1399 with OT + social
-work, optional E0143 only if the door cannot be widened, E0241 grab bars (not Original
-Medicare), and E0163 if she would be room-confined.
-
 ## Reliability evaluation
 
 `backend/evaluation.py` measures the deterministic agents against simulated RoomPlan
