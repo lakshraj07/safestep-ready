@@ -1,5 +1,7 @@
 # SafeStep Ready: verify the home before discharge
 
+**Demo video:** [Watch the SafeStep demo](https://drive.google.com/drive/folders/1-2swh8X8_oUBJNEzy3fk_Dzd4iFlI6-T?usp=sharing)
+
 **Medplum holds the chart. Twilio texts the family a walkthrough link. Riley (ElevenLabs) guides the iPhone walk while Claude analyzes every frame live. SafeStep writes draft FHIR and Medicare coverage back to Medplum before the patient leaves.**
 
 ![Architecture: chart to SMS to home walkthrough to analysis to draft FHIR back to the chart](docs/architecture.png)
