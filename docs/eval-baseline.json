@@ -1,0 +1,69 @@
+{
+  "suite": "lidar_500",
+  "seed": 7,
+  "meshes": 500,
+  "twins": [
+    "medplum",
+    "twilio"
+  ],
+  "geometry": {
+    "doors_evaluated": 1319,
+    "blocked_truth": 480,
+    "flagged": 480,
+    "true_positive": 480,
+    "false_positive": 0,
+    "false_negative": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "spans_evaluated": 172,
+    "spans_correct": 172,
+    "max_unit_error_in": 0.0
+  },
+  "escalations": {
+    "door_to_ot_md": {
+      "passed": 349,
+      "total": 349
+    },
+    "critical_to_coordinator": {
+      "passed": 500,
+      "total": 500
+    },
+    "uncovered_to_social_work": {
+      "passed": 500,
+      "total": 500
+    },
+    "routine_always_present": {
+      "passed": 500,
+      "total": 500
+    },
+    "ordering": {
+      "passed": 500,
+      "total": 500
+    },
+    "no_door_no_clinical": {
+      "passed": 151,
+      "total": 151
+    }
+  },
+  "fhir": {
+    "bundles": 500,
+    "malformed_resources": 0,
+    "servicerequest_status_errors": 0,
+    "unknown_hcpcs": 0,
+    "walker_catalog_errors": 0,
+    "twin_posted": 500,
+    "twin_accepted": 500
+  },
+  "twilio": {
+    "messages": 500,
+    "delivered": 500,
+    "negative_controls": 3,
+    "negative_controls_rejected": 3
+  },
+  "assertions": 6994,
+  "failures": 0,
+  "pass_rate": 100.0,
+  "elapsed_s": 0.08,
+  "walker_width_in": 28.0,
+  "clearance_threshold_in": 29.0
+}
