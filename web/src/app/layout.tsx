@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "SafeStep Ready — verify the home before discharge",
   description:
-    "Medplum chart in. Twilio auto-texts the iPhone link. Vapi or ElevenLabs (Riley) guides the walk. Draft FHIR and Medicare coverage back to Medplum.",
+    "Medplum chart in. Twilio auto-texts the iPhone link. ElevenLabs (Riley) guides the walk. Draft FHIR and Medicare coverage back to Medplum.",
 }
 
 export default function RootLayout({

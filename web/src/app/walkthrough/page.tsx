@@ -106,9 +106,8 @@ function WalkthroughInner() {
         <CardContent className="space-y-4 text-sm">
           <p>
             Twilio auto-texted this link. {familyContact.name} ({familyContact.relation}) opens
-            it on her {familyContact.device}. Riley (Vapi and/or ElevenLabs, gathering mode)
-            tells her how to complete each room. This web demo uses the same scripted
-            fallback when those keys are empty.
+            it on her {familyContact.device}. Riley (ElevenLabs, gathering mode)
+            tells her how to complete each room.
           </p>
           {!ehrPulled && <p>Pull the discharge note on the EHR tab first.</p>}
           {!handoffSent && ehrPulled && <p>SMS not sent yet. You can still start from this link.</p>}
@@ -179,7 +178,7 @@ function WalkthroughInner() {
       </div>
       <ul className="w-full max-w-sm space-y-2 text-sm">
         <li className="text-xs tracking-widest text-[#6D645A] uppercase">
-          Riley · gathering mode (Vapi / ElevenLabs)
+          Riley · gathering mode (ElevenLabs)
         </li>
         {room.events.slice(0, visibleEvents).map((e) => (
           <li key={e.text} className="rounded-lg border border-[#eee6dd] bg-white px-3 py-2">

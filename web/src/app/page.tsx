@@ -77,7 +77,7 @@ export default function EhrPage() {
                   variant="outline"
                   onClick={() => router.push("/walkthrough?auto=1")}
                 >
-                  Open {familyContact.name}’s iPhone — Riley (Vapi / ElevenLabs) guides the walk
+                  Open {familyContact.name}’s iPhone — Riley (ElevenLabs) guides the walk
                 </Button>
               </div>
             </>

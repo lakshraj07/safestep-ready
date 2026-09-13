@@ -1,4 +1,4 @@
-/** Port of engine/backend/geometry.py — doorway width vs walker. */
+/** Port of backend/geometry.py — doorway width vs walker. */
 export const WALKER_WIDTH_IN = 28.0
 const M_TO_IN = 39.3701
 
