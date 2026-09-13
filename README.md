@@ -1,6 +1,19 @@
 # SafeStep Ready — verify the home before discharge
 
-**Medplum holds the chart. Twilio auto-texts the family a walkthrough link. Vapi and/or ElevenLabs (Riley) guides the iPhone scan. SafeStep writes draft FHIR + Medicare/insurance coverage back to Medplum (EHR / PIMS).**
+**Medplum holds the chart. Twilio auto-texts the family a walkthrough link. Vapi (Riley) guides the iPhone scan. SafeStep writes draft FHIR + Medicare/insurance coverage back to Medplum (EHR / PIMS).**
+
+![Architecture: chart to SMS to home walkthrough to analysis to draft FHIR back to the chart](docs/architecture.png)
+
+## What runs live today vs. what is scripted
+
+| Layer | Status | Where |
+| --- | --- | --- |
+| Apple RoomPlan LiDAR scan, doorway widths, floor plan, AR boxes | **Live** on a LiDAR iPhone | `engine/iphone/Sources/RoomScanner.swift`, `LiveDetection.swift` |
+| Claude Haiku fast-pass per frame, Claude Sonnet deep-pass (STEADI/HSSAT), obligations scoring, Riley brain (`/v1/chat/completions` SSE) | **Live** with `ANTHROPIC_API_KEY` | `engine/backend/vision.py`, `brain.py`, `obligations.py` |
+| Walker-clearance math, escalation router, HCPCS / Medicare coverage table, draft FHIR Bundle, clinician report + approvals | **Live** (deterministic) | `engine/backend/geometry.py`, `escalations.py`, `fhir_writeback.py`, `report.py` |
+| Replay any real walkthrough video through the real pipeline | **Live** after `prepare_demo.py <video>` | `engine/backend/prepare_demo.py`, `demo.py` |
+| Medplum read of the note and POST of the Bundle, Twilio SMS, Vapi call start | **Adapter stubs**: interfaces and payloads are built, the outbound HTTP calls are the next commit (`engine/.env.example` lists the keys) | `src/lib/medplum.ts`, `src/lib/outreach.ts`, `engine/iphone/Sources/VoiceManager.swift` |
+| Web demo (EHR surface, scripted iPhone bezel, write-back review) | **Runs with no keys** | `src/` |
 
 ![SafeStep — Monica Hilpert, 76 — her chart cannot answer one question: is her home ready for her?](engine/docs/intro.jpg)
 
