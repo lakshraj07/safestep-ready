@@ -138,18 +138,6 @@ false negatives on the same 500 meshes. The Claude passes (vision fast and deep 
 obligation scoring) are exercised by replaying a real walkthrough through the live
 pipeline with `backend/prepare_demo.py`, not by this suite.
 
-## Repo layout
-
-| Path | What |
-| --- | --- |
-| `backend/` | FastAPI: `/frame`, `/roomplan`, `/v1/chat/completions`, obligations, escalations, FHIR drafts + `DME_CATALOG`, report, floor plan, demo replay, evaluation |
-| `iphone/` | iPhone client: RoomPlan LiDAR, AR detection boxes, confirmation cards, Riley session |
-| `web/` | Next.js care-team surfaces: Medplum chart view, iPhone walk, write-back review with the Medicare table |
-| `docs/` | Architecture card, doorway measurement card, full sample report (27 findings, photos, floor plan), eval baseline |
-| `synthetic-ambient-fhir-25/` | Encounter artifacts used to seed Monica's note (synthetic, Synthea) |
-| `LIVE_DEMO_PLAN.md` | Three-minute run of show, failure ladder, rehearsal checklist |
-| `RELAY_CONCEPT.md` | Product thesis: care-plan execution after the encounter |
-
 ## Run it
 
 ```bash
