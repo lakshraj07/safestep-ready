@@ -1,4 +1,4 @@
-# SafeStep Ready — verify the home before discharge
+# SafeStep Ready: verify the home before discharge
 
 **Medplum holds the chart. Twilio auto-texts the family a walkthrough link. Riley (ElevenLabs voice, Vapi optional) guides the iPhone scan while Claude analyzes frames live. SafeStep writes draft FHIR + Medicare/insurance coverage back to Medplum (EHR / PIMS).**
 
