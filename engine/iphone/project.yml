@@ -1,0 +1,28 @@
+name: Walkthrough
+options:
+  bundleIdPrefix: com.safestep
+targets:
+  Walkthrough:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources: [Sources]
+    info:
+      path: Sources/Info.plist
+      properties:
+        UILaunchScreen: {}
+        CFBundleDisplayName: SafeStep
+        UIUserInterfaceStyle: Light
+        NSMicrophoneUsageDescription: Voice conversation with the walkthrough guide (Vapi).
+        NSCameraUsageDescription: Room scanning during the iPhone walkthrough.
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.safestep.walkthrough
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SWIFT_VERSION: "5.9"
